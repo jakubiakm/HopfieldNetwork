@@ -1,4 +1,5 @@
 from csv import reader
+import numpy as np
 
 def get_data(path):
     csv_list = load_csv(0, path)
@@ -25,3 +26,14 @@ def load_csv(start_index, path):
                 counter += 1
                 dataset.append(row)
     return dataset
+
+def get_test_data(train_data, mumber_of_tests, distort):
+    test_data = []
+    for _ in range(mumber_of_tests):
+        r_i = np.random.randint(0, len(train_data))
+        base_pattern = np.array(train_data[r_i])
+        noise = 1 * (np.random.random(base_pattern.shape) > distort)
+        np.place(noise, noise == 0, -1)
+        noisy_pattern = np.multiply(base_pattern, noise)
+        test_data.append((base_pattern, noisy_pattern))
+    return test_data;
