@@ -1,6 +1,7 @@
 import tensorflow as tf
+import data as data
+
 from config import cfg
-import os
 
 def validate_arguments():
     if((cfg.update_type == 'asynchronous' or cfg.update_type == 'synchronous') == False):
@@ -8,13 +9,14 @@ def validate_arguments():
 
 def print_arguments():
     print(f'Number of neurons = {cfg.number_of_neurons}')
-    print(f'Image path = {cfg.image_path}')
+    print(f'Image path = {cfg.images_path}')
     print(f'Image width = {cfg.image_width}')
     print(f'Network update type = {cfg.update_type}')  
 
 def main(_):
     validate_arguments()
     print_arguments()
+    patterns = data.get_data(cfg.images_path)
 
 if __name__ == "__main__":
     tf.app.run()
