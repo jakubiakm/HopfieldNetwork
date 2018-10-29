@@ -8,7 +8,7 @@ def train(neu, training_data):
         w += np.outer(data, data)
     return w
 
-def test(weights, testing_data, update_type):
+def test(weights, testing_data, update_type, steps):
     success = 0.0
 
     output_data = []
@@ -16,12 +16,12 @@ def test(weights, testing_data, update_type):
     for data in testing_data:
         true_data = data[0]
         noisy_data = data[1]
-        predicted_data = retrieve_pattern(weights, noisy_data, update_type)
+        predicted_data = retrieve_pattern(weights, noisy_data, update_type, steps)
         if np.array_equal(true_data, predicted_data):
             success += 1.0
         output_data.append([true_data, noisy_data, predicted_data])
 
-    return (success / len(testing_data)), output_data
+    return (100 * success / len(testing_data)), output_data
 
 def retrieve_pattern(weights, data, update_type, steps=200):
     res = np.array(data)
