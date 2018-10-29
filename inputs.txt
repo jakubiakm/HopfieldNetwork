@@ -1,0 +1,20 @@
+python ./main.py --images_path=.\data\animals-14x9.csv --image_width=14 --number_of_neurons=126 --number_of_tests=1000 --update_type=synchronous --distortion=0.05 --steps=50
+python ./main.py --images_path=.\data\animals-14x9.csv --image_width=14 --number_of_neurons=126 --number_of_tests=1000 --update_type=asynchronous --distortion=0.05 --steps=5000
+
+python ./main.py --images_path=.\data\large-25x25.csv --image_width=25 --number_of_neurons=625 --number_of_tests=500 --update_type=synchronous --distortion=0.05 --steps=25
+python ./main.py --images_path=.\data\large-25x25.csv --image_width=25 --number_of_neurons=625 --number_of_tests=500 --update_type=asynchronous --distortion=0.05 --steps=5550
+
+python ./main.py --images_path=.\data\large-25x25.plus.csv --image_width=25 --number_of_neurons=625 --number_of_tests=500 --update_type=synchronous --distortion=0.05 --steps=25
+python ./main.py --images_path=.\data\large-25x25.plus.csv --image_width=25 --number_of_neurons=625 --number_of_tests=500 --update_type=asynchronous --distortion=0.05 --steps=5550
+
+python ./main.py --images_path=.\data\letters-8x12.csv --image_width=8 --number_of_neurons=96 --number_of_tests=1000 --update_type=synchronous --distortion=0.05 --steps=50
+python ./main.py --images_path=.\data\letters-8x12.csv --image_width=8 --number_of_neurons=96 --number_of_tests=1000 --update_type=asynchronous --distortion=0.05 --steps=5000
+
+python ./main.py --images_path=.\data\letters-14x20.csv --image_width=14 --number_of_neurons=280 --number_of_tests=1000 --update_type=synchronous --distortion=0.05 --steps=50
+python ./main.py --images_path=.\data\letters-14x20.csv --image_width=14 --number_of_neurons=280 --number_of_tests=1000 --update_type=asynchronous --distortion=0.05 --steps=5000
+
+python ./main.py --images_path=.\data\letters-abc-8x12.csv --image_width=8 --number_of_neurons=96 --number_of_tests=1000 --update_type=synchronous --distortion=0.05 --steps=50
+python ./main.py --images_path=.\data\letters-abc-8x12.csv --image_width=8 --number_of_neurons=96 --number_of_tests=1000 --update_type=asynchronous --distortion=0.05 --steps=5000
+
+python ./main.py --images_path=.\data\small-7x7.csv --image_width=7 --number_of_neurons=49 --number_of_tests=1000 --update_type=synchronous --distortion=0.05 --steps=50
+python ./main.py --images_path=.\data\small-7x7.csv --image_width=7 --number_of_neurons=49 --number_of_tests=1000 --update_type=asynchronous --distortion=0.05 --steps=5000

@@ -15,7 +15,10 @@ def print_arguments():
     print(f'Image path = {cfg.images_path}')
     print(f'Image width = {cfg.image_width}')
     print(f'Network update type = {cfg.update_type}')  
-
+    print(f'Step count in update = {cfg.steps}')  
+    print(f'Test data distortion = {cfg.distortion}')
+    print(f'Number of tests = {cfg.number_of_tests}')
+    
 def main(_):
     validate_arguments()
     print_arguments()

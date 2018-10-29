@@ -10,9 +10,9 @@ flags.DEFINE_integer('image_width', 14, 'Image width')
 flags.DEFINE_integer('steps', 100, 'Step count in update')
 flags.DEFINE_integer('number_of_tests', 100, 'Number of tests')
 
-flags.DEFINE_float('distortion', 0.1, 'Step size')
+flags.DEFINE_float('distortion', 0.1, 'Test data distortion')
 
-flags.DEFINE_string('update_type', 'asynchronous', 'Network update type: [asynchronous, synchronous]')
+flags.DEFINE_string('update_type', 'synchronous', 'Network update type: [asynchronous, synchronous]')
 flags.DEFINE_string('images_path', r'.\data\animals-14x9.csv', 'Training file path')
 
 cfg = tf.app.flags.FLAGS
