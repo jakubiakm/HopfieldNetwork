@@ -21,12 +21,13 @@ def main(_):
     print_arguments()
     patterns = data.get_data(cfg.images_path)
     #images.plot_images(patterns, cfg.image_width)
-    training_data = [np.array(d) for d in patterns][:len(patterns)]
-    test_data = data.get_test_data(training_data, 10, 0.1)
+    training_data = [np.array(d) for d in patterns]
+    test_data = data.get_test_data(training_data, 1000, 0.15)
 
     W = hopfield.train(cfg.number_of_neurons, patterns)
-    accuracy, op_imgs = hopfield.test(W, test_data)
+    accuracy, op_imgs = hopfield.test(W, test_data, cfg.update_type)
     print("Accuracy of the network is %f" % (accuracy * 100))
-    images.plot_images2(op_imgs, cfg.image_width, "Reconstructed Data", len(op_imgs))
+    images.plot_images2(op_imgs, cfg.image_width, "Reconstructed Data", 10)
+
 if __name__ == "__main__":
     tf.app.run()

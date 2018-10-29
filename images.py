@@ -22,7 +22,7 @@ def plot_images2(images, images_width, title, no_i_x, no_i_y=3):
     for i in range(no_i_x):
         for j in range(no_i_y):
             ax = fig.add_subplot(no_i_x, no_i_y, no_i_x * j + (i + 1))
-            ax.matshow(images[no_i_x * j + i], cmap="gray")
+            ax.matshow(images[no_i_x * j + i], cmap="Oranges")
             plt.xticks(np.array([]))
             plt.yticks(np.array([]))
 
