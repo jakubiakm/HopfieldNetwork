@@ -11,6 +11,8 @@ def train(neu, training_data):
     w = np.zeros([neu, neu])
     for data in training_data:
         w += np.outer(data, data)
+    for i in range(neu):
+        w[i][i] = 0
     return w
 
 def test(weights, testing_data, update_type, steps, patterns):
@@ -67,10 +69,11 @@ def retrieve_pattern(weights, data, update_type, steps=200, patterns = None, ite
     return res
 
 def stopCriterium(prev2_data, prev_data, data, patterns):
-    if np.array_equal(data, prev_data):
-        return 1
-    if np.array_equal(data, prev2_data):
-        return 2
+    if(cfg.update_type == 'synchronous'):
+        if np.array_equal(data, prev_data):
+            return 1
+        if np.array_equal(data, prev2_data):
+            return 2
     for pattern in patterns:
         if np.array_equal(data, pattern):
             return 3
