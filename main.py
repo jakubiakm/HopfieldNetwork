@@ -28,7 +28,7 @@ def main(_):
     test_data = data.get_test_data(training_data, cfg.number_of_tests, cfg.distortion)
 
     W = hopfield.train(cfg.number_of_neurons, patterns)
-    accuracy, op_imgs = hopfield.test(W, test_data, cfg.update_type, cfg.steps)
+    accuracy, op_imgs = hopfield.test(W, test_data, cfg.update_type, cfg.steps, patterns)
     print("Accuracy of the network is %f" % (accuracy))
     images.plot_images2(op_imgs, cfg.image_width, "Reconstructed Data", 10)
 
