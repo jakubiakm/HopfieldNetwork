@@ -88,14 +88,14 @@ def saveAsImage(picture_number, iteration, data):
     width = cfg.image_width
     height = int(cfg.number_of_neurons / cfg.image_width)
     
-    img = Image.new( 'RGB', (width * pixel_size, height * pixel_size), "black") # Create a new black image
+    img = Image.new( '1', (width * pixel_size, height * pixel_size), "black") # Create a new black image
     pixels = img.load() # Create the pixel map
     for i in range(width):    # For every pixel:
         for j in range(height):
             if data[i+cfg.image_width*j] == 1:
                 for x in range(pixel_size):
                     for y in range(pixel_size):
-                        pixels[i*pixel_size+x,j*pixel_size+y] = (255, 255, 255) # Set the colour accordingly
+                        pixels[i*pixel_size+x,j*pixel_size+y] = (1) # Set the colour accordingly
     img.save(path+str(picture_number)+'/'+str(iteration) + '.bmp')
     
 
