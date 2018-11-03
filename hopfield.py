@@ -44,12 +44,15 @@ def test(weights, testing_data, update_type, steps, patterns):
 
     return (100 * success / len(testing_data)), output_data
 
-def retrieve_pattern(weights, data, update_type, steps=200, patterns = None, iteration = 0):
+def retrieve_pattern(weights, data, update_type, steps=20000, patterns = None, iteration = 0):
     res = np.array(data)
     prev = None
     prev2 = None
     last_saved = None
-
+    last_saved_permutation = np.copy(res)
+    permutation_array = np.arange(len(res))
+    np.random.shuffle(permutation_array)
+    index = 0
     for step in range(steps):
         if(update_type == 'synchronous' or (np.array_equal(last_saved, res) == False)):
             images.save_as_image(iteration, step, res)
@@ -64,18 +67,26 @@ def retrieve_pattern(weights, data, update_type, steps=200, patterns = None, ite
                 else:
                     res[i] = -1
         if(update_type == 'asynchronous'):
-            index = random.randrange(len(res))
-            raw_v = np.dot(weights[index], res)
+            raw_v = np.dot(weights[permutation_array[index]], res)
             if raw_v > 0:
-                res[index] = 1
+                res[permutation_array[index]] = 1
             else:
-                res[index] = -1
-        stopValue = stop_criterium(update_type, prev2, prev, res, patterns)
+                res[permutation_array[index]] = -1
+            index += 1
+            
+        stopValue = stop_criterium(update_type, prev2, prev, res, last_saved_permutation, index, patterns)
+        if index == len(res):
+            np.random.shuffle(permutation_array)
+            last_saved_permutation = np.copy(res)
+            index = 0
+
         if stopValue > 0:
             if stopValue == 1:
                 print('repeated pattern', step + 1)
             elif stopValue == 2:
                 print('cyclic pattern', step + 1)
+            elif stopValue == 3:
+                print('asynchronous cyclic pattern', step + 1)
             else:
                 print('same as training pattern', step + 1)
             images.save_as_image(iteration, step + 1, res)
@@ -84,13 +95,17 @@ def retrieve_pattern(weights, data, update_type, steps=200, patterns = None, ite
     images.save_as_image(iteration, step + 1, res)
     return res
 
-def stop_criterium(update_type, prev2_data, prev_data, data, patterns):
+def stop_criterium(update_type, prev2_data, prev_data, data, last_saved_permutation, index, patterns):
     if(update_type == 'synchronous'):
         if np.array_equal(data, prev_data):
             return 1
         if np.array_equal(data, prev2_data):
             return 2
+    if(update_type == 'asynchronous'):
+        if index == len(data):
+            if np.array_equal(data, last_saved_permutation):
+                return 3
     for pattern in patterns:
         if np.array_equal(data, pattern):
-            return 3
+            return 4
     return -1
