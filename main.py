@@ -23,7 +23,6 @@ def main(_):
     validate_arguments()
     print_arguments()
     patterns = data.get_data(cfg.images_path)
-    #images.plot_images(patterns, cfg.image_width)
     training_data = [np.array(d) for d in patterns]
     test_data = data.get_test_data(training_data, cfg.number_of_tests, cfg.distortion)
 
