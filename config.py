@@ -7,7 +7,7 @@ flags = tf.app.flags
 #####################
 flags.DEFINE_integer('number_of_neurons', 126, 'Number of neurons')
 flags.DEFINE_integer('image_width', 14, 'Image width')
-flags.DEFINE_integer('steps', 100, 'Step count in update')
+flags.DEFINE_integer('steps', 20000, 'Step count in update')
 flags.DEFINE_integer('number_of_tests', 100, 'Number of tests')
 
 flags.DEFINE_float('distortion', 0.1, 'Test data distortion')
