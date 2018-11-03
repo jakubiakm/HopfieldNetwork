@@ -3,12 +3,16 @@ import matplotlib.pyplot as plt
 import random
 import images as images
 import os
+import datetime
 from config import cfg
 
 def train(neu, training_data):
-    w = np.zeros([neu, neu])
+    w = np.zeros([neu, neu], dtype='b')
+    ind = 0
     for data in training_data:
         w += np.outer(data, data)
+        print(f'training iteration: {ind} time: {datetime.datetime.now()}')
+        ind += 1
     for i in range(neu):
         w[i][i] = 0
     return w
@@ -25,12 +29,10 @@ def serialize_matrix(matrix):
                 f.write("\n")
 
 def n_position_number(number, positions=10):
-    result = str(number);
+    result = str(number)
     while len(result) < positions:
         result = " " + result
     return result
-
-
 
 def test(weights, testing_data, update_type, steps, patterns):
     success = 0.0
@@ -116,3 +118,4 @@ def stop_criterium(update_type, prev2_data, prev_data, data, last_saved_permutat
         if np.array_equal(data, pattern):
             return 4
     return -1
+    
