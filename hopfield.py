@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 import images as images
-import pickle
+from config import cfg
 
 def train(neu, training_data):
     w = np.zeros([neu, neu])
@@ -10,11 +10,21 @@ def train(neu, training_data):
         w += np.outer(data, data)
     for i in range(neu):
         w[i][i] = 0
-    serialized = pickle.dumps(w, protocol=0)
-    f = open("./results/matrix.txt", "w")
-    f.write(serialized)
-    f.close()
+    if cfg.serialize_matrix:
+        with open("./results/matrix.txt", 'w') as f:
+            for arr in w:
+                for item in arr:
+                    f.write("%s" % NPositionNumber(item))
+                f.write("\n")
     return w
+
+def NPositionNumber(number, positions=10):
+    result = str(number);
+    while len(result) < positions:
+        result = " " + result
+    return result
+
+
 
 def test(weights, testing_data, update_type, steps, patterns):
     success = 0.0
