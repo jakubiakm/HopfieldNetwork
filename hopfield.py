@@ -6,6 +6,7 @@ import io
 from PIL import Image
 from array import array
 from config import cfg
+import pickle
 
 def train(neu, training_data):
     w = np.zeros([neu, neu])
@@ -13,6 +14,10 @@ def train(neu, training_data):
         w += np.outer(data, data)
     for i in range(neu):
         w[i][i] = 0
+    serialized = pickle.dumps(w, protocol=0)
+    f = open("./results/matrix.txt", "w")
+    f.write(serialized)
+    f.close()
     return w
 
 def test(weights, testing_data, update_type, steps, patterns):
