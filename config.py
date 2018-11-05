@@ -15,6 +15,7 @@ flags.DEFINE_float('distortion', 0.1, 'Test data distortion')
 flags.DEFINE_string('update_type', 'synchronous', 'Network update type: [asynchronous, synchronous]')
 flags.DEFINE_string('images_path', r'.\data\animals-14x9.csv', 'Training file path')
 flags.DEFINE_integer('output_pixel_size', 10, 'Output image pixel size. Non positive value for no output')
-flags.DEFINE_boolean('serialize_matrix', False, 'Serialize matrix. It can make memory problems')
+flags.DEFINE_boolean('serialize_matrix', False, 'Serialize matrix. It can make memory and speed problems')
+flags.DEFINE_integer('output_images_count', 15, 'Number of images shown after program ends execution')
 
 cfg = tf.app.flags.FLAGS

@@ -29,6 +29,6 @@ def main(_):
     W = hopfield.train(cfg.number_of_neurons, patterns)
     accuracy, op_imgs = hopfield.test(W, test_data, cfg.update_type, cfg.steps, patterns)
     print("Accuracy of the network is %f" % (accuracy))
-    
+   
 if __name__ == "__main__":
     tf.app.run()
