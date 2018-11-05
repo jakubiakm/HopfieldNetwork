@@ -6,14 +6,14 @@ import os
 import datetime
 from config import cfg
 
-def train(neu, training_data):
-    w = np.zeros([neu, neu], dtype='b')
+def train(neurons, training_data):
+    w = np.zeros([neurons, neurons], dtype='b')
     ind = 0
     for data in training_data:
         w += np.outer(data, data)
         print(f'training iteration: {ind} time: {datetime.datetime.now()}')
         ind += 1
-    for i in range(neu):
+    for i in range(neurons):
         w[i][i] = 0
     return w
 
