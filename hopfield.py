@@ -46,7 +46,7 @@ def test(weights, testing_data, update_type, steps, patterns):
         true_data = data[0]
         noisy_data = data[1]
         images.save_as_image(iteration, 0, true_data)
-        predicted_data = retrieve_pattern(weights, noisy_data, update_type, steps, patterns, iteration)
+        predicted_data = predict(weights, noisy_data, update_type, steps, patterns, iteration)
         if np.array_equal(true_data, predicted_data):
             success += 1.0
         output_data.append([true_data, noisy_data, predicted_data])
@@ -54,7 +54,7 @@ def test(weights, testing_data, update_type, steps, patterns):
 
     return (100 * success / len(testing_data)), output_data
 
-def retrieve_pattern(weights, data, update_type, steps=20000, patterns = None, iteration = 0):
+def predict(weights, data, update_type, steps=20000, patterns = None, iteration = 0):
     res = np.array(data)
     prev = None
     prev2 = None
