@@ -45,6 +45,7 @@ def test(weights, testing_data, update_type, steps, patterns):
     for data in testing_data:
         true_data = data[0]
         noisy_data = data[1]
+        images.save_as_image(iteration, 0, true_data)
         predicted_data = retrieve_pattern(weights, noisy_data, update_type, steps, patterns, iteration)
         if np.array_equal(true_data, predicted_data):
             success += 1.0
@@ -64,7 +65,7 @@ def retrieve_pattern(weights, data, update_type, steps=20000, patterns = None, i
     index = 0
     for step in range(steps):
         if(update_type == 'synchronous' or (np.array_equal(last_saved, res) == False)):
-            images.save_as_image(iteration, step, res)
+            images.save_as_image(iteration, step + 1, res)
             last_saved = np.copy(res)
         prev2 = prev
         prev = np.copy(res)
@@ -98,10 +99,10 @@ def retrieve_pattern(weights, data, update_type, steps=20000, patterns = None, i
                 print('asynchronous cyclic pattern', step + 1)
             else:
                 print('same as training pattern', step + 1)
-            images.save_as_image(iteration, step + 1, res)
+            images.save_as_image(iteration, step + 2, res)
             return res
     print('returning because of iterations limit', step + 1)
-    images.save_as_image(iteration, step + 1, res)
+    images.save_as_image(iteration, step+2, res)
     return res
 
 def stop_criterium(update_type, prev2_data, prev_data, data, last_saved_permutation, index, patterns):
